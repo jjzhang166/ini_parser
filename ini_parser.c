@@ -20,8 +20,8 @@ void free_ini_items(INI_ITEMS* items){
 
 bool ini_parse(INI_ITEMS *items, char *file_name) {
     char buf[MAX_LINE_SIZE];
-    char tmpKey[MAX_KEY_SIZE];
-    char tmpValue[MAX_VALUE_SIZE];
+    char tmpKey[MAX_LINE_SIZE];
+    char tmpValue[MAX_LINE_SIZE];
 
     items->size = 0;
 
@@ -32,6 +32,12 @@ bool ini_parse(INI_ITEMS *items, char *file_name) {
     while (fgets(buf, sizeof(buf), fp) != NULL)
     {
         if (sscanf(buf, "%s = %s", tmpKey, tmpValue) == 2) {
+            
+            if(strlen(tmpKey)>MAX_KEY_SIZE-1 || strlen(tmpValue)>MAX_VALUE_SIZE-1){
+                fclose(fp);
+                return false;
+            }
+
             strcpy(items->items[items->size].key,   tmpKey);
             strcpy(items->items[items->size].value, tmpValue);
             ++items->size;
