@@ -76,4 +76,56 @@ $ ./ini_parser ../example.ini
 
 Now, enjoy!     : )
 
+# How it works
 
+Yes, it's such an easy code. But what I am to talk about is a trick in this project.
+
+Think about these code in `ini_parser.h`
+
+``` c
+
+typedef struct ini_item {
+    char key[MAX_KEY_SIZE];
+    char value[MAX_VALUE_SIZE];
+}INI_ITEM;
+
+typedef struct ini_items {
+    int size;
+    INI_ITEM items[1];
+}INI_ITEMS;
+
+```
+
+Why the `struct ini_items` has a member `INI_ITEM items[1]` but not `INI_ITEM items*` ?
+
+Let's find some thing more in `ini_parser.c`
+
+``` c
+INI_ITEMS* alloc_ini_items(int max_item_size){
+    if(max_item_size <= 0) return NULL;  // no items?
+    else
+        return (INI_ITEMS*)malloc(
+                sizeof(INI_ITEMS) +                      // the items list, it has at least one item
+                sizeof(INI_ITEM) * (max_item_size-1)     // more items
+        );
+}
+```
+
+If we use `INI_ITEM items*`, the code will be
+
+```
+INI_ITEMS* alloc_ini_items(int max_item_size){
+    if(max_item_size <= 0) return NULL;
+    else{
+        INI_ITEMS* items = (INI_ITEMS*) malloc(sizeof(INI_ITEMS));
+        items->items = (INI_ITEM*) malloc(sizeof(INI_ITEM)*max_item_size);
+        return items;
+    }
+}
+```
+
+Ok, it's clear. The diffrences between two way is about memery space.
+
+The `INI_ITEM items[1]` way will always alloc a contiguous memory space, but the other not.
+
+That will be more efficient.
