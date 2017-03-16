@@ -113,7 +113,7 @@ INI_ITEMS* alloc_ini_items(int max_item_size){
 
 If we use `INI_ITEM items*`, the code will be
 
-```
+``` c
 INI_ITEMS* alloc_ini_items(int max_item_size){
     if(max_item_size <= 0) return NULL;
     else{
