@@ -98,7 +98,7 @@ typedef struct ini_items {
 
 Why the `struct ini_items` has a member `INI_ITEM items[1]` but not `INI_ITEM items*` ?
 
-Let's find some thing more in `ini_parser.c`
+Let's find some thing more
 
 ``` c
 INI_ITEMS* alloc_ini_items(int max_item_size){
