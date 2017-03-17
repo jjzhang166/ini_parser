@@ -1,7 +1,8 @@
 # ini_parser
 
-一个用C写的超级快的ini parser
+[[中文文档](README_CN.md)] [[English README](README.md)]
 
+一个用C写的超级快的ini parser
 
 作者 : xiaozhuai
 

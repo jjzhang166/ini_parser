@@ -1,7 +1,8 @@
 # ini_parser
 
-A super fast ini parser writen in C
+[[中文文档](README_CN.md)] [[English README](README.md)]
 
+A super fast ini parser writen in C
 
 author : xiaozhuai
 
