@@ -33,7 +33,7 @@ typedef struct ini_items {
  *
  * @param max_item_size  max size of items
  */
-INI_ITEMS* alloc_ini_items(int max_item_size){
+static inline INI_ITEMS* alloc_ini_items(int max_item_size){
     if(max_item_size <= 0) return NULL;  // no items?
     else
         return (INI_ITEMS*)malloc(
@@ -48,7 +48,7 @@ INI_ITEMS* alloc_ini_items(int max_item_size){
  *
  * @param items container
  */
-void free_ini_items(INI_ITEMS* items){
+static inline void free_ini_items(INI_ITEMS* items){
     if(items != NULL) free(items);
 }
 
@@ -61,7 +61,7 @@ void free_ini_items(INI_ITEMS* items){
  * @param	fileName The name of the file to parse
  * @return	true on success or false on failure
  */
-bool ini_parse(INI_ITEMS *items, char *file_name) {
+static inline bool ini_parse(INI_ITEMS *items, char *file_name) {
     char buf[MAX_LINE_SIZE];
     char tmpKey[MAX_LINE_SIZE];
     char tmpValue[MAX_LINE_SIZE];
@@ -99,7 +99,7 @@ bool ini_parse(INI_ITEMS *items, char *file_name) {
  * @param	char *key The key of the config item
  * @return	value, if not exist will return NULL
  */
-char* ini_get(INI_ITEMS* items, char* key)
+static inline char* ini_get(INI_ITEMS* items, char* key)
 {
     //Check to see if items exist
     if (items->size == 0)
