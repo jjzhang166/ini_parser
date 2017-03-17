@@ -9,7 +9,7 @@ email : 798047000@qq.com
 
 # example
 
-you can find this in example.c
+you can find this in `example.c`
 
 ``` c
 #include <stdio.h>
@@ -80,7 +80,7 @@ Now, enjoy!     : )
 
 Yes, it's such an easy code. But what I am to talk about is a trick in this project.
 
-Think about these code in `ini_parser.h`
+Look at these code in `ini_parser.h`
 
 ``` c
 
@@ -98,7 +98,7 @@ typedef struct ini_items {
 
 Why the `struct ini_items` has a member `INI_ITEM items[1]` but not `INI_ITEM items*` ?
 
-Let's find some thing more
+Let's find something more
 
 ``` c
 INI_ITEMS* alloc_ini_items(int max_item_size){
@@ -126,6 +126,5 @@ INI_ITEMS* alloc_ini_items(int max_item_size){
 
 Ok, it's clear. The diffrences between two way is about memery space.
 
-The `INI_ITEM items[1]` way will always alloc a contiguous memory space, but the other not.
+The `INI_ITEM items[1]` way will always alloc a contiguous memory space and it will be more efficient. But the other not.
 
-That will be more efficient.
